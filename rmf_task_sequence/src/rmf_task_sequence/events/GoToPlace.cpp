@@ -220,26 +220,26 @@ Header GoToPlace::Description::generate_header(
 
   const auto start_wp_opt = initial_state.waypoint();
   if (!start_wp_opt)
-    utils::fail(fail_header, "Initial state is missing a waypoint");
+    utils::fail(fail_header, "초기 상태의 웨이포인트가 없습니다");
 
   const auto start_wp = *start_wp_opt;
 
   const auto& graph = parameters.planner()->get_configuration().graph();
   if (graph.num_waypoints() <= start_wp)
   {
-    utils::fail(fail_header, "Initial waypoint [" + std::to_string(start_wp)
-      + "] is outside the graph [" + std::to_string(graph.num_waypoints())
-      + "]");
+    utils::fail(fail_header, "초기 웨이포인트 [" + std::to_string(start_wp)
+      + "] 가 [" + std::to_string(graph.num_waypoints())
+      + "]" + " 의 그래프 밖에 있습니다" );
   }
 
   const auto start_name = rmf_task::standard_waypoint_name(graph, start_wp);
 
   if (graph.num_waypoints() <= _pimpl->destination.waypoint())
   {
-    utils::fail(fail_header, "Destination waypoint ["
+    utils::fail(fail_header, "도착 웨이포인트 ["
       + std::to_string(_pimpl->destination.waypoint())
-      + "] is outside the graph [" + std::to_string(graph.num_waypoints())
-      + "]");
+      + "] 가 [" + std::to_string(graph.num_waypoints())
+      + "]" + " 의 그래프 밖에 있습니다");
   }
 
   const auto goal_name_ = destination_name(parameters);
@@ -249,13 +249,13 @@ Header GoToPlace::Description::generate_header(
 
   if (!estimate.has_value())
   {
-    utils::fail(fail_header, "Cannot find a path from ["
-      + start_name + "] to [" + goal_name_ + "]");
+    utils::fail(fail_header, "["
+      + start_name + "] 에서 [" + goal_name_ + "] 까지 경로를 찾을 수 없습니다");
   }
 
   return Header(
-    "Go to " + goal_name_,
-    "Moving the robot from " + start_name + " to " + goal_name_,
+      goal_name_ + "으로 이동",
+    "로봇이 " + start_name + " 에서 " + goal_name_ + "으로 이동 중",
     *estimate);
 }
 

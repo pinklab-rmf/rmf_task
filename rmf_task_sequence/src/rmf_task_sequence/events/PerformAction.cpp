@@ -260,15 +260,15 @@ Header PerformAction::Description::generate_header(
   if (!start_wp_opt)
     utils::fail(
       error_header,
-      "Initial state is missing a waypoint");
+      "초기 상태에 웨이포인트가 누락되었습니다");
 
   const auto start_wp = *start_wp_opt;
   const auto start_name = utils::waypoint_name(start_wp, parameters);
 
   return Header(
-    "Perform action",
-    "Performing action " +  _pimpl->category +
-    " at waypoint [" + start_name + "]",
+    "동작 수행",
+    " 웨이포인트 [" + start_name + "] 에서"
+    + _pimpl->category  + " 동작 수행중",
     _pimpl->action_duration_estimate);
 
 }

@@ -100,8 +100,8 @@ Header WaitFor::Description::generate_header(
     _pimpl->duration);
 
   return Header(
-    "Waiting",
-    "Waiting for [" + std::to_string(seconds.count()) + "] seconds to elapse",
+    "대기중",
+    "[" + std::to_string(seconds.count()) + "] 초 동안 대기 중",
     _pimpl->duration);
 }
 
