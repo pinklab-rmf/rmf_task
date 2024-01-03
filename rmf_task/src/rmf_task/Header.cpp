@@ -77,7 +77,7 @@ std::string standard_waypoint_name(
   }
 
   return graph.get_waypoint(waypoint).name_or_index(
-    "[place:%s]", "[graph-wp:%d]");
+    "[장소:%s]", "[그래프-웨이포인트:%d]");
 }
 
 } // namespace rmf_task
